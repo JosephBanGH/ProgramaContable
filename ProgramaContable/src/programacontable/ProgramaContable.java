@@ -4,6 +4,8 @@
  */
 package programacontable;
 
+import FrmGUI.FrmInventario;
+
 /**
  *
  * @author LENOV
@@ -14,7 +16,8 @@ public class ProgramaContable {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //general
+        FrmInventario finventario = new FrmInventario();
+        finventario.setVisible(true);
     }
     
 }

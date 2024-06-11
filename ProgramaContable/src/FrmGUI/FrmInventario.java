@@ -4,17 +4,21 @@
  */
 package FrmGUI;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author LENOV
  */
 public class FrmInventario extends javax.swing.JFrame {
 
+    public DefaultTableModel modelo = new DefaultTableModel();;
     /**
      * Creates new form FrmInventario
      */
     public FrmInventario() {
         initComponents();
+        modelo.setColumnIdentifiers(new String[]{"Operación","Cant.","Valor","Total","Cant L.","Valor L.","Total L."});
     }
 
     /**
@@ -34,17 +38,7 @@ public class FrmInventario extends javax.swing.JFrame {
 
         jLabel1.setText("VALUACION DE INVENTARIOS");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable1.setModel(modelo);
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
