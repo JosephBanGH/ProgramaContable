@@ -13,7 +13,7 @@ public class Movimiento {
     private int cantidad;
     private double valorU;
 
-    public Movimiento(boolean tipo, int cantidad, float valorU) {
+    public Movimiento(boolean tipo, int cantidad, double valorU) {
         this.tipo = tipo;
         this.cantidad = cantidad;
         this.valorU = valorU;

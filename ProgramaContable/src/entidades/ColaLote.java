@@ -67,14 +67,19 @@ public class ColaLote {
         u=null;
     }
     
-    public void mostrar(DefaultTableModel modelo,Movimiento mov){
-        modelo.setRowCount(0);
-        modelo.setColumnIdentifiers(new String[]{"Operación","Cant.","Valor","Total","Cant L.","Valor L.","Total L."});
-        modelo.addRow(new Object[]{
-            mov.getTipo(),
-            mov.getCantidad(),
-            
-        });
+    public void mostrar(DefaultTableModel modelo){
+        Nodo<LoteUnico> x=p.getSgte();
+        int i=0;
+        while(x!=null){
+            modelo.addRow(new Object[]{
+                "","","","",
+                x.getInfo().getCantidad(),
+                x.getInfo().getValorU(),
+                x.getInfo().getTotal()
+            });
+            x=x.getSgte();
+            i++;
+        }
     }
     
     public void mostrar(DefaultTableModel modelo,Movimiento mov,LoteUnico lote){

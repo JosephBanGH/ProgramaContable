@@ -48,4 +48,9 @@ public class LoteUnico {
     public void setValorU(double valorU) {
         this.valorU = valorU;
     }
+    
+    public double getTotal(){
+        calcularTotal();
+        return total;
+    } 
 }
