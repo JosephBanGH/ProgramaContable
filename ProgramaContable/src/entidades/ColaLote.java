@@ -69,6 +69,16 @@ public class ColaLote {
     
     public void mostrar(DefaultTableModel modelo,Movimiento mov){
         modelo.setRowCount(0);
-        modelo.addRow(new Object[] = {"",""});
+        modelo.setColumnIdentifiers(new String[]{"Operación","Cant.","Valor","Total","Cant L.","Valor L.","Total L."});
+        modelo.addRow(new Object[]{
+            mov.getTipo(),
+            mov.getCantidad(),
+            
+        });
+    }
+    
+    public void mostrar(DefaultTableModel modelo,Movimiento mov,LoteUnico lote){
+        modelo.setRowCount(0);
+        modelo.addRow(new Object[]{"",""});
     }
 }

@@ -26,7 +26,11 @@ public class Movimiento {
     public boolean isTipo() {
         return tipo;
     }
-
+    
+    public String getTipo(){
+        return tipo? "Salida":"Entrada";
+    }    
+    
     public void setTipo(boolean tipo) {
         this.tipo = tipo;
     }
