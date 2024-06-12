@@ -212,7 +212,6 @@ public class costeo_directo__Absorcion extends javax.swing.JFrame {
     jTextField6.setText("");
     jTextField7.setText("");
     jTextField8.setText("");
-    jTextField9.setText("");
     jTextField10.setText("");
     jTextField11.setText("");
     txtCostoVenta.setText("");
