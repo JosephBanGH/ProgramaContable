@@ -16,6 +16,7 @@ public class LoteUnico {
     public LoteUnico(int cantidad, double valorU) {
         this.cantidad = cantidad;
         this.valorU = valorU;
+        total = cantidad*valorU;
     }
 
     public void calcularTotal(){
@@ -53,4 +54,10 @@ public class LoteUnico {
         calcularTotal();
         return total;
     } 
+
+    public void clear() {
+        total=0;
+        valorU=0;
+        cantidad=0;
+    }
 }

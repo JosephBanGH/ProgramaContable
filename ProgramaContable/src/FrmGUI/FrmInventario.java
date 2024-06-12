@@ -19,6 +19,11 @@ public class FrmInventario extends javax.swing.JFrame {
     public LoteUnico lote;
     public boolean vacio;
     public boolean modo;//0 promedio y 1 PEPS
+    double entradas;
+    double salidas;
+    double total;
+    double saldo;
+    double costoVentas;
     
     /**
      * Creates new form FrmInventario
@@ -29,6 +34,8 @@ public class FrmInventario extends javax.swing.JFrame {
         vacio = true;
         cola = new ColaLote();
         modo = true;
+        lote = new LoteUnico(0,0);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -58,6 +65,10 @@ public class FrmInventario extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtEntradas = new javax.swing.JTextField();
+        txtSaldo = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtCostoVentas = new javax.swing.JTextField();
         bttnModo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -124,30 +135,46 @@ public class FrmInventario extends javax.swing.JFrame {
 
         jLabel6.setText("Total Salidas:");
 
-        jLabel7.setText("Total Entradas:");
+        jLabel7.setText("Total Compras:");
+
+        jLabel8.setText("Saldo inicial:");
+
+        jLabel9.setText("Costo de ventas:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(41, 41, 41))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
-                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel5)))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(41, 41, 41))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel5))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(46, 46, 46)
+                                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtCostoVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(37, 37, 37))
         );
         jPanel2Layout.setVerticalGroup(
@@ -163,7 +190,15 @@ public class FrmInventario extends javax.swing.JFrame {
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(txtCostoVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         bttnModo.setText("PEPS");
@@ -211,7 +246,7 @@ public class FrmInventario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,7 +254,7 @@ public class FrmInventario extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(bttnInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -245,6 +280,10 @@ public class FrmInventario extends javax.swing.JFrame {
             vacio = false;
             mov = new Movimiento(false,Integer.parseInt(txtCantidad.getText()),Double.parseDouble(txtValorU.getText()));
             mostrarEntrada(mov);
+            saldo = mov.calcularTotal();
+            entradas = 0;
+            salidas = 0;
+            txtSaldo.setText(String.valueOf(saldo));
         }else if(selected.equals("Salida")){
             mov = new Movimiento(true,Integer.parseInt(txtCantidad.getText()),Double.parseDouble(txtValorU.getText()));
             mostrarSalida(mov);
@@ -252,45 +291,106 @@ public class FrmInventario extends javax.swing.JFrame {
             mov = new Movimiento(false,Integer.parseInt(txtCantidad.getText()),Double.parseDouble(txtValorU.getText()));
             mostrarEntrada(mov);
         }
+        mostrarResultados();
     }//GEN-LAST:event_bttnInsertarActionPerformed
 
     private void bttnModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttnModoActionPerformed
         if(modo){
             cola.clear();
             modo = false;
-            modelo.setRowCount(0);
+            bttnModo.setText("Promedio");
         }else{
             modo = true;
+            bttnModo.setText("PEPS");
+            lote.clear();
         }
         modelo.setRowCount(0);
+        vacio=true;
+        DefaultComboBoxModel cmodelo;
+        cmodelo =  new DefaultComboBoxModel(new Object[]{"Saldo"});
+        cbxOperacion.setModel(cmodelo);
+        resetResultados();
     }//GEN-LAST:event_bttnModoActionPerformed
 
     private void mostrarEntrada(Movimiento mov) {
-        cola.calcularEntrada(mov);
-        modelo.addRow(new Object[]{
-            "Entrada",
-            mov.getCantidad(),
-            mov.getValorU(),
-            mov.calcularTotal(),
-            cola.frente().getCantidad(),
-            cola.frente().getValorU(),
-            cola.frente().getTotal()
-        });
-        cola.mostrar(modelo);
+        if(modo){
+            cola.calcularEntrada(mov);
+            modelo.addRow(new Object[]{
+                "Entrada",
+                mov.getCantidad(),
+                mov.getValorU(),
+                mov.calcularTotal(),
+                cola.frente().getCantidad(),
+                cola.frente().getValorU(),
+                cola.frente().getTotal()
+            });
+            cola.mostrar(modelo);
+            entradas = entradas+mov.calcularTotal();
+            total = cola.calcularTotal();
+        }else{
+            lote.calcularEntrada(mov);
+            modelo.addRow(new Object[]{
+                "Entrada",
+                mov.getCantidad(),
+                mov.getValorU(),
+                mov.calcularTotal(),
+                lote.getCantidad(),
+                lote.getValorU(),
+                lote.getTotal()
+            });
+            total = lote.getTotal();
+            entradas = entradas+mov.calcularTotal();
+        }
     }    
     private void mostrarSalida(Movimiento mov) {
-        cola.calcularSalida(mov);
-        mov.setValorU(cola.frente().getValorU());
-        modelo.addRow(new Object[]{
-            "Salida",
-            mov.getCantidad(),
-            mov.getValorU(),
-            mov.calcularTotal(),
-            cola.frente().getCantidad(),
-            cola.frente().getValorU(),
-            cola.frente().getTotal()
-        });
-        cola.mostrar(modelo);
+        if(modo){
+            System.out.println(mov.getCantidad());
+            cola.calcularSalida(mov);
+            System.out.println(mov.getCantidad());
+            mov.setValorU(cola.frente().getValorU());
+            modelo.addRow(new Object[]{
+                "Salida",
+                mov.getCantidad(),
+                mov.getValorU(),
+                mov.calcularTotal(),
+                cola.frente().getCantidad(),
+                cola.frente().getValorU(),
+                cola.frente().getTotal()
+            });
+            cola.mostrar(modelo);
+            salidas = salidas+mov.calcularTotal();
+            total = cola.calcularTotal();
+        }else{
+            lote.calcularSalida(mov);
+            mov.setValorU(lote.getValorU());
+            modelo.addRow(new Object[]{
+                "Salida",
+                mov.getCantidad(),
+                mov.getValorU(),
+                mov.calcularTotal(),
+                lote.getCantidad(),
+                lote.getValorU(),
+                lote.getTotal()
+            });
+            total = lote.getTotal();
+            salidas = salidas+mov.calcularTotal();
+        }
+    }
+    
+    public void mostrarResultados(){
+        txtEntradas.setText(String.valueOf(entradas));
+        txtSalidas.setText(String.valueOf(costoVentas));
+        txtTotal.setText(String.valueOf(total));
+        costoVentas = saldo + entradas - total;
+        txtCostoVentas.setText(String.valueOf(costoVentas));
+    }
+    
+    public void resetResultados(){
+        total = 0;
+        salidas = 0;
+        entradas = 0;
+        txtSaldo.setText("-");
+        txtCostoVentas.setText("-");
     }
     /**
      * @param args the command line arguments
@@ -338,12 +438,16 @@ public class FrmInventario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtCostoVentas;
     private javax.swing.JTextField txtEntradas;
+    private javax.swing.JTextField txtSaldo;
     private javax.swing.JTextField txtSalidas;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtValorU;

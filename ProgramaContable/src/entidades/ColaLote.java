@@ -29,9 +29,10 @@ public class ColaLote {
         if(mov.getCantidad()<frente().getCantidad()){
             frente().calcularSalida(mov);
         }else{
-            mov.setCantidad(mov.getCantidad()-frente().getCantidad());
+            Movimiento temp = new Movimiento(true,0,0);
+            temp.setCantidad(mov.getCantidad()-frente().getCantidad());
             desencolar();
-            frente().calcularSalida(mov);
+            calcularSalida(temp);
         }
     }
     
@@ -58,6 +59,8 @@ public class ColaLote {
     }
     
     public LoteUnico frente(){
+        if(p.getInfo()==null)
+            return new LoteUnico(0,0);
         return p.getInfo();
     }    
     
@@ -69,7 +72,6 @@ public class ColaLote {
     
     public void mostrar(DefaultTableModel modelo){
         Nodo<LoteUnico> x=p.getSgte();
-        int i=0;
         while(x!=null){
             modelo.addRow(new Object[]{
                 "","","","",
@@ -78,12 +80,16 @@ public class ColaLote {
                 x.getInfo().getTotal()
             });
             x=x.getSgte();
-            i++;
         }
     }
     
-    public void mostrar(DefaultTableModel modelo,Movimiento mov,LoteUnico lote){
-        modelo.setRowCount(0);
-        modelo.addRow(new Object[]{"",""});
+    public double calcularTotal(){
+        Nodo<LoteUnico> x = p;
+        double suma = 0;
+        while(x!=null){
+            suma = suma + x.getInfo().getTotal();
+            x=x.getSgte();
+        }
+        return suma;
     }
 }
